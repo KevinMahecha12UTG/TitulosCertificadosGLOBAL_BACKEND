@@ -53,3 +53,4 @@ Thumbs.db
 .env.local
 
 src/config/corsConfig.js
+test_crypto.js
