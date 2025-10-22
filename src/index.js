@@ -1,7 +1,7 @@
 require("dotenv").config();
 const express = require("express");
 const corsConfig = require('./config/corsConfig');
-const addSignatory = require('./routes/Signatures/signatures.routes');
+const signaturesRoutes = require('./routes/Signatures/signatures.routes'); 
 
 const app = express();
 const PORT = process.env.PORT || 3002;
@@ -13,4 +13,4 @@ app.listen(PORT, () => {console.log(`Servidor Backend Titulos y certificados cor
 app.use(express.json());
 app.use(corsConfig);
 
-app.use("/titulos-certificados", addSignatory);
+app.use("/titulos-certificados", signaturesRoutes);

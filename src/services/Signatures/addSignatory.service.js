@@ -3,7 +3,7 @@ const { pool } = require('../../config/db');
 const { encrypt, decrypt } = require('./utils/addSignatory.service.utils'); 
 
 async function addSignatoryService(data) {
-  const {nombre,email,id_marca = null,archivo_certificado,archivo_key,contraseña_firma,estatus = 1} = data;
+  const {nombre,apellido_paterno,apellido_materno,email,id_marca = null,archivo_certificado,archivo_key,contraseña_firma,estatus = 1,archivo_certificado_name,archivo_key_name} = data;
 
   try {
     const certificadoBuffer = Buffer.isBuffer(archivo_certificado)
@@ -20,22 +20,30 @@ async function addSignatoryService(data) {
       SELECT * FROM public.fnc_registrar_firmante(
         $1::VARCHAR,
         $2::VARCHAR,
-        $3::INT,
-        $4::BYTEA,
-        $5::BYTEA,
-        $6::VARCHAR,
-        $7::SMALLINT
+        $3::VARCHAR,
+        $4::VARCHAR,
+        $5::INT,
+        $6::BYTEA,
+        $7::BYTEA,
+        $8::VARCHAR,
+        $9::SMALLINT,
+        $10::VARCHAR,
+        $11::VARCHAR
       )
     `;
 
     const values = [
       nombre,
+      apellido_paterno,
+      apellido_materno,
       email,
       id_marca,
       certificadoBuffer,
       keyBuffer,
       contraseñaEncriptada,
-      estatus
+      estatus,
+      archivo_certificado_name,
+      archivo_key_name
     ];
 
     const result = await pool.query(query, values);
