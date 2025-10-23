@@ -15,7 +15,6 @@ async function verifySignatoryService(email) {
         u.nombre,
         u.apellido_paterno,
         u.apellido_materno,
-        f.contraseña_firma,
         f.archivo_certificado_name,
         f.archivo_key_name
       FROM usuarios u
